@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Amour Grand | Ballet & Fine Arts</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              obsidian: "#0A0A0B",
+              cherry: "#1a0404",
+              gold: "#D4AF37",
+              champagne: "#F9F4F0",
+            },
+            fontFamily: {
+              serif: ["'Cormorant Garamond'", "serif"],
+              sans: ["'Plus Jakarta Sans'", "sans-serif"],
+            },
+            backgroundImage: {
+              hero: "url('hero-bg.jpg')",
+            },
+          },
+        },
+      };
+
+      function updatePrice(selectId, displayId) {
+        const selectElement = document.getElementById(selectId);
+        const displayElement = document.getElementById(displayId);
+        displayElement.innerText = "€" + selectElement.value;
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: "Cormorant Garamond", serif;
+        overflow-x: hidden;
+      }
+
+      .stylized-brand {
+        font-weight: 700;
+        color: #d4af37;
+        letter-spacing: -0.01em;
+      }
+
+      h2,
+      h3,
+      h4 {
+        animation: revealText 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+      }
+
+      @keyframes revealText {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+          filter: blur(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      /* --- BUTTONS --- */
+      .btn-shimmer {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        z-index: 1;
+      }
+      .btn-shimmer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: all 0.6s;
+      }
+      .btn-shimmer:hover::before {
+        left: 100%;
+      }
+      .btn-shimmer:hover {
+        letter-spacing: 0.4em;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      }
+
+      .btn-luxury {
+        position: relative;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .btn-luxury:hover {
+        border-color: #d4af37;
+        color: #d4af37;
+        background: rgba(212, 175, 55, 0.05);
+        transform: translateY(-2px);
+      }
+
+      .btn-gold-fill {
+        position: relative;
+        z-index: 1;
+        transition: color 0.4s ease;
+      }
+      .btn-gold-fill::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #d4af37;
+        transition: width 0.4s ease;
+        z-index: -1;
+      }
+      .btn-gold-fill:hover::after {
+        width: 100%;
+      }
+      .btn-gold-fill:hover {
+        color: #0a0a0b !important;
+      }
+
+      /* Dropdown */
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #0b0a0a;
+        min-width: 220px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        z-index: 100;
+        top: 100%;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .nav-dropdown:hover .dropdown-content {
+        display: block;
+        border-top: 20px solid transparent;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Sidebar + Cards */
+      .sidebar-box {
+        background: rgba(245, 242, 55, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .hero-gradient {
+        background: radial-gradient(circle at center, #1a0404 0%);
+      }
+      .booking-card {
+        background: #0d0d0e;
+        border: 1px solid rgba(212, 175, 55, 0.1);
+      }
+
+      /* Payment option */
+      .payment-option input:checked + label {
+        border-color: #d4af37;
+        color: #d4af37;
+        background: rgba(212, 175, 55, 0.05);
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-obsidian text-champagne/70 selection:bg-gold selection:text-obsidian"
+  >
+    <header
+      class="fixed w-full z-50 border-b border-gold/20 bg-black/20 backdrop-blur-md"
+    >
+      <div
+        class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6"
+      >
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl stylized-brand italic"
+          style="text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8)"
+        >
+          Mon Amour
+          <span
+            class="uppercase font-light tracking-widest text-base md:text-lg lg:text-xl"
+            style="opacity: 0.9; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7)"
+          >
+            Grand
+          </span>
+        </h1>
+
+        <div class="flex items-center space-x-10 md:space-x-12">
+          <nav
+            class="hidden md:flex space-x-8 md:space-x-12 items-center text-[10px] md:text-[11px] lg:text-[12px] text-champagne font-extrabold uppercase tracking-[0.3em]"
+          >
+            <a
+              href="#hero"
+              class="hover:text-gold transition-colors"
+              style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+              >Home</a
+            >
+            <a
+              href="#footer"
+              class="hover:text-gold transition-colors"
+              style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+              >Contact</a
+            >
+            <a
+              href="#"
+              id="cartLink"
+              class="hover:text-gold transition-colors flex items-center gap-2 cursor-pointer"
+              style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+              >Cart (0)</a
+            >
+            <a
+              href="login.html"
+              id="loginLink"
+              class="hover:text-gold transition-colors hidden"
+              style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+              >Login</a
+            >
+            <a
+              href="signup.html"
+              id="signupLink"
+              class="hover:text-gold transition-colors"
+              style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+              >Sign Up</a
+            >
+          </nav>
+
+          <div class="nav-dropdown">
+            <button
+              class="btn-shimmer bg-[#fcd7d7] text-obsidian px-8 py-2 text-[11px] md:text-[12px] lg:text-[13px] font-black uppercase tracking-widest"
+            >
+              Reservations ▼
+            </button>
+
+            <div class="dropdown-content right-0 mt-2 p-4 space-y-3">
+              <a
+                href="#nutcracker-booking"
+                class="block hover:text-gold italic text-sm normal-case border-b border-white/5 pb-2"
+                >Nutcracker Tickets</a
+              >
+              <a
+                href="#gallery-booking"
+                class="block hover:text-gold italic text-sm normal-case"
+                >Gallery Entry Pass</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section
+        id="hero"
+        class="relative h-screen flex items-center justify-center text-center px-6"
+      >
+        <!-- Darkened background image -->
+        <div class="absolute inset-0 bg-hero bg-cover bg-center bg-no-repeat">
+          <div class="absolute inset-0 bg-black/60"></div>
+          <!-- stronger overlay -->
+        </div>
+
+        <!-- Content -->
+        <div class="relative max-w-5xl space-y-6 md:space-y-8 z-10">
+          <span
+            class="text-[11px] font-bold tracking-[0.5em] uppercase italic block mb-4 text-gold"
+          >
+            Premiering Winter 2026
+          </span>
+
+          <h2
+            class="text-5xl sm:text-6xl md:text-7xl lg:text-[9rem] font-light leading-tight text-white"
+            style="text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7)"
+          >
+            Mon <span class="italic text-gold font-semibold">Amour.</span>
+          </h2>
+
+          <p
+            class="text-sm sm:text-base md:text-lg italic text-champagne max-w-2xl mx-auto leading-relaxed"
+            style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6)"
+          >
+            Where the rhythm of Tchaikovsky meets the silent, eternal grace of
+            the Louvre.
+          </p>
+
+          <div
+            class="flex flex-col md:flex-row gap-4 md:gap-6 justify-center pt-6 md:pt-8"
+          >
+            <button
+              onclick="document.getElementById('nutcracker-section').scrollIntoView()"
+              class="btn-shimmer bg-[#4D0505] text-gold px-10 py-4 text-[10px] font-black uppercase tracking-widest"
+            >
+              Explore Nutcracker
+            </button>
+            <button
+              onclick="document.getElementById('gallery-section').scrollIntoView()"
+              class="btn-luxury px-10 py-4 text-champagne"
+            >
+              Visit Gallery
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nutcracker Section -->
+      <section
+        id="nutcracker-section"
+        class="max-w-7xl mx-auto px-6 py-24 space-y-12"
+      >
+        <div class="grid lg:grid-cols-12 gap-8">
+          <div
+            class="lg:col-span-8 relative group h-[500px] overflow-hidden border border-[#D4AF37] bg-black"
+          >
+            <img
+              src="ballet.jpg"
+              class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-1000"
+            />
+            <div
+              class="absolute inset-0 flex flex-col items-center justify-center text-center"
+            >
+              <span
+                class="text-white/50 text-[12px] md:text-sm uppercase tracking-[0.6em] mb-4"
+                style="text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6)"
+                >Live Performance</span
+              >
+              <h3
+                class="text-6xl md:text-7xl lg:text-8xl italic font-bold text-white"
+                style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7)"
+              >
+                The Nutcracker
+              </h3>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="sidebar-box p-8">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-white/60 mb-6"
+              >
+                Archives
+              </h5>
+              <div class="grid grid-cols-2 gap-3">
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-default"
+                  >Elegance</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-default"
+                  >Ballet</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-default"
+                  >Tulle</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-default"
+                  >Grace</span
+                >
+              </div>
+            </div>
+
+            <div class="sidebar-box p-8 bg-[#140808]/50 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-6"
+              >
+                Concierge
+              </h5>
+              <p
+                class="text-sm md:text-base italic leading-relaxed text-champagne/70 mb-6"
+              >
+                Allow us to curate your evening. For special seating and private
+                tours, contact our desk.
+              </p>
+              <a
+                href="#"
+                class="text-[10px] md:text-sm uppercase font-bold tracking-widest border-b border-white/20 pb-1 hover:text-gold hover:border-gold transition-all"
+                >Inquire Further</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section
+        id="gallery-section"
+        class="max-w-7xl mx-auto px-6 py-24 space-y-12"
+      >
+        <div class="grid lg:grid-cols-12 gap-8">
+          <div
+            class="lg:col-span-8 relative group h-[500px] overflow-hidden border border-[#D4AF37] bg-black"
+          >
+            <img
+              src="paris art.jpg"
+              class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
+            />
+            <div
+              class="absolute inset-0 flex flex-col items-center justify-center text-center"
+            >
+              <h3
+                class="text-6xl md:text-7xl lg:text-8xl italic font-bold text-white"
+                style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7)"
+              >
+                The Fine Arts Gallery
+              </h3>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 space-y-6">
+            <div class="sidebar-box p-8">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-white/60 mb-6"
+              >
+                Collections
+              </h5>
+              <div class="grid grid-cols-2 gap-3">
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-pointer"
+                  >Sketches</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-pointer"
+                  >Sculpture</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-pointer"
+                  >Archives</span
+                >
+                <span
+                  class="p-3 border border-white/5 text-[10px] md:text-sm uppercase tracking-widest text-center hover:border-gold transition-colors cursor-pointer"
+                  >Heritage</span
+                >
+              </div>
+            </div>
+
+            <div class="sidebar-box p-8 bg-gold/5 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-4"
+              >
+                Private Tour
+              </h5>
+              <p
+                class="text-sm md:text-base italic text-white/70 leading-relaxed mb-4"
+              >
+                Book a 1-on-1 session with our head curator to explore the
+                hidden vaults.
+              </p>
+              <button
+                onclick="document.getElementById('gallery-booking').scrollIntoView({behavior: 'smooth'})"
+                class="text-[10px] md:text-sm font-black border-b border-gold pb-1 text-gold uppercase tracking-widest hover:tracking-[0.2em] transition-all cursor-pointer"
+              >
+                Book Session
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Nutcracker Booking Section -->
+      <section
+        id="nutcracker-booking"
+        class="max-w-7xl mx-auto px-6 py-24 space-y-12"
+      >
+        <h2
+          class="text-5xl md:text-6xl lg:text-7xl font-bold text-gold text-center mb-12 stylized-brand"
+        >
+          Book Your Experience
+        </h2>
+
+        <div class="grid lg:grid-cols-12 gap-12">
+          <!-- Booking Form -->
+          <div
+            class="lg:col-span-8 bg-black/70 border border-gold p-10 rounded-xl shadow-lg space-y-6"
+          >
+            <h3 class="text-2xl md:text-3xl font-semibold text-white mb-6">
+              Nutcracker Tickets
+            </h3>
+
+            <!-- Login Check -->
+            <div
+              id="loginPromptNutcracker"
+              class="hidden bg-[#140808]/50 border border-gold/30 p-4 rounded-md mb-4"
+            >
+              <p class="text-champagne/80 mb-3">
+                Please
+                <a
+                  href="login.html"
+                  class="text-gold hover:underline font-semibold"
+                  >login</a
+                >
+                or
+                <a
+                  href="signup.html"
+                  class="text-gold hover:underline font-semibold"
+                  >sign up</a
+                >
+                to book tickets.
+              </p>
+            </div>
+
+            <!-- Ticket Type -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Select Ticket Type</label
+              >
+              <select
+                id="ticketType"
+                class="w-full p-3 bg-[#0d0d0e] border border-white/10 text-champagne rounded-md"
+              >
+                <option value="Standard">Standard - €50</option>
+                <option value="Premium">Premium - €90</option>
+                <option value="VIP">VIP - €150</option>
+              </select>
+            </div>
+
+            <!-- Number of Tickets -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Number of Tickets</label
+              >
+              <input
+                type="number"
+                id="ticketQty"
+                min="1"
+                value="1"
+                class="w-full p-3 bg-[#0d0d0e] border border-white/10 text-champagne rounded-md"
+              />
+            </div>
+
+            <!-- Total Price Display -->
+            <div class="text-right text-white/80 font-bold text-lg md:text-xl">
+              Total: <span id="totalPrice">€50</span>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Payment Method</label
+              >
+              <div class="flex gap-4">
+                <div
+                  class="payment-option flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    id="creditCard"
+                    name="payment"
+                    checked
+                    class="hidden"
+                  />
+                  <label
+                    for="creditCard"
+                    class="p-3 border border-white/10 rounded-md flex-1 text-center text-champagne hover:border-gold transition-all"
+                    >Credit Card</label
+                  >
+                </div>
+                <div
+                  class="payment-option flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    id="paypal"
+                    name="payment"
+                    class="hidden"
+                  />
+                  <label
+                    for="paypal"
+                    class="p-3 border border-white/10 rounded-md flex-1 text-center text-champagne hover:border-gold transition-all"
+                    >PayPal</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              id="bookTickets"
+              class="btn-shimmer bg-gold text-black w-full py-4 font-black uppercase tracking-widest mt-6 text-lg md:text-xl"
+            >
+              Add to Cart
+            </button>
+          </div>
+
+          <!-- Booking Info / Summary -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="sidebar-box p-8 bg-[#140808]/50 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-4"
+              >
+                Booking Summary
+              </h5>
+              <p
+                class="text-sm md:text-base italic text-champagne/70 leading-relaxed"
+                id="bookingSummary"
+              >
+                Select your ticket type and quantity. Your total will be updated
+                here.
+              </p>
+            </div>
+
+            <div class="sidebar-box p-8 bg-black/50 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-4"
+              >
+                Important Info
+              </h5>
+              <p
+                class="text-sm md:text-base italic text-champagne/70 leading-relaxed"
+              >
+                All sales are final. Please arrive 30 minutes before the show.
+                VIP tickets include a backstage tour.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Booking Section -->
+      <section
+        id="gallery-booking"
+        class="max-w-7xl mx-auto px-6 py-24 space-y-12"
+      >
+        <h2
+          class="text-5xl md:text-6xl lg:text-7xl font-bold text-gold text-center mb-12 stylized-brand"
+        >
+          Gallery Entry Pass
+        </h2>
+
+        <div class="grid lg:grid-cols-12 gap-12">
+          <!-- Booking Form -->
+          <div
+            class="lg:col-span-8 bg-black/70 border border-gold p-10 rounded-xl shadow-lg space-y-6"
+          >
+            <h3 class="text-2xl md:text-3xl font-semibold text-white mb-6">
+              Gallery Entry Pass
+            </h3>
+
+            <!-- Login Check -->
+            <div
+              id="loginPromptGallery"
+              class="hidden bg-[#140808]/50 border border-gold/30 p-4 rounded-md mb-4"
+            >
+              <p class="text-champagne/80 mb-3">
+                Please
+                <a
+                  href="login.html"
+                  class="text-gold hover:underline font-semibold"
+                  >login</a
+                >
+                or
+                <a
+                  href="signup.html"
+                  class="text-gold hover:underline font-semibold"
+                  >sign up</a
+                >
+                to book tickets.
+              </p>
+            </div>
+
+            <!-- Ticket Type -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Select Pass Type</label
+              >
+              <select
+                id="galleryTicketType"
+                class="w-full p-3 bg-[#0d0d0e] border border-white/10 text-champagne rounded-md"
+              >
+                <option value="General">General Admission - €25</option>
+                <option value="Premium">Premium Pass - €45</option>
+                <option value="VIP">VIP Experience - €80</option>
+              </select>
+            </div>
+
+            <!-- Number of Tickets -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Number of Passes</label
+              >
+              <input
+                type="number"
+                id="galleryTicketQty"
+                min="1"
+                value="1"
+                class="w-full p-3 bg-[#0d0d0e] border border-white/10 text-champagne rounded-md"
+              />
+            </div>
+
+            <!-- Date Selection -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Select Date</label
+              >
+              <input
+                type="date"
+                id="galleryDate"
+                class="w-full p-3 bg-[#0d0d0e] border border-white/10 text-champagne rounded-md"
+              />
+            </div>
+
+            <!-- Total Price Display -->
+            <div class="text-right text-white/80 font-bold text-lg md:text-xl">
+              Total: <span id="galleryTotalPrice">€25</span>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="space-y-2">
+              <label class="text-sm md:text-base font-semibold text-champagne"
+                >Payment Method</label
+              >
+              <div class="flex gap-4">
+                <div
+                  class="payment-option flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    id="galleryCreditCard"
+                    name="galleryPayment"
+                    checked
+                    class="hidden"
+                  />
+                  <label
+                    for="galleryCreditCard"
+                    class="p-3 border border-white/10 rounded-md flex-1 text-center text-champagne hover:border-gold transition-all"
+                    >Credit Card</label
+                  >
+                </div>
+                <div
+                  class="payment-option flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    id="galleryPaypal"
+                    name="galleryPayment"
+                    class="hidden"
+                  />
+                  <label
+                    for="galleryPaypal"
+                    class="p-3 border border-white/10 rounded-md flex-1 text-center text-champagne hover:border-gold transition-all"
+                    >PayPal</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              id="bookGalleryTickets"
+              class="btn-shimmer bg-gold text-black w-full py-4 font-black uppercase tracking-widest mt-6 text-lg md:text-xl"
+            >
+              Add to Cart
+            </button>
+          </div>
+
+          <!-- Booking Info / Summary -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="sidebar-box p-8 bg-[#140808]/50 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-4"
+              >
+                Booking Summary
+              </h5>
+              <p
+                class="text-sm md:text-base italic text-champagne/70 leading-relaxed"
+                id="galleryBookingSummary"
+              >
+                Select your pass type and quantity. Your total will be updated
+                here.
+              </p>
+            </div>
+
+            <div class="sidebar-box p-8 bg-black/50 border-gold/20">
+              <h5
+                class="text-[10px] md:text-sm font-semibold tracking-[0.35em] text-gold mb-4"
+              >
+                Important Info
+              </h5>
+              <p
+                class="text-sm md:text-base italic text-champagne/70 leading-relaxed"
+              >
+                Gallery hours: 10 AM - 6 PM daily. Premium passes include audio
+                guide. VIP Experience includes private curator tour.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cart Modal -->
+      <div
+        id="cartModal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4"
+        onclick="closeCartModal(event)"
+      >
+        <div
+          class="bg-obsidian border border-gold max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 rounded-xl relative"
+          onclick="event.stopPropagation()"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold text-gold stylized-brand">My Cart</h2>
+            <button
+              id="closeCart"
+              class="text-champagne hover:text-gold text-2xl font-bold w-8 h-8 flex items-center justify-center"
+              onclick="closeCartModal()"
+            >
+              &times;
+            </button>
+          </div>
+          <div id="cartItems" class="space-y-4 mb-6">
+            <!-- Cart items will be displayed here -->
+          </div>
+          <div class="border-t border-gold/20 pt-4">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xl font-bold text-champagne">Total:</span>
+              <span id="cartTotal" class="text-2xl font-bold text-gold"
+                >€0</span
+              >
+            </div>
+            <button
+              id="checkoutBtn"
+              class="btn-shimmer bg-gold text-black w-full py-4 font-black uppercase tracking-widest text-lg"
+            >
+              Proceed to Checkout
+            </button>
+            <button
+              id="clearCartBtn"
+              class="mt-2 btn-luxury w-full py-3 text-champagne"
+            >
+              Clear Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // --- BACKEND CONNECTION LOGIC ---
+        async function saveToMongoDB(item) {
+          // Data Validation: Prevent empty orders
+          if (!item || !item.quantity || item.quantity <= 0) {
+            console.error("Invalid booking: Quantity must be greater than 0");
+            return { success: false, error: "Invalid quantity" };
+          }
+
+          try {
+            const response = await fetch("http://localhost:5000/save-booking", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ticketType: item.type,
+                quantity: item.quantity,
+                totalPrice: `€${item.price * item.quantity}`,
+              }),
+            });
+
+            if (response.ok) {
+              console.log("Data successfully sent to the Chef (Server)!");
+              return { success: true };
+            } else {
+              console.error(
+                "Server error:",
+                response.status,
+                response.statusText
+              );
+              return { success: false, error: "Server error" };
+            }
+          } catch (error) {
+            console.error("Database Error:", error);
+            // We don't alert here to keep the user experience smooth,
+            // but we log it in the console.
+            return { success: false, error: error.message };
+          }
+        }
+
+        // --- EXISTING CART LOGIC (Modified to talk to MongoDB) ---
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+        // Update cart count
+        function updateCartCount() {
+          const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+          const cartLink = document.getElementById("cartLink");
+          const loginLink = document.getElementById("loginLink");
+          const signupLink = document.getElementById("signupLink");
+
+          if (cartLink) {
+            cartLink.innerHTML = `Cart (${cartCount})`;
+            cartLink.onclick = (e) => {
+              e.preventDefault();
+              document.getElementById("cartModal").classList.remove("hidden");
+              document.getElementById("cartModal").classList.add("flex");
+              renderCart();
+            };
+          }
+
+          // Update login/signup visibility
+          if (isLoggedIn) {
+            if (loginLink) loginLink.classList.remove("hidden");
+            if (signupLink) signupLink.classList.add("hidden");
+            if (loginLink) loginLink.innerHTML = "Logout";
+            if (loginLink) loginLink.href = "#";
+            if (loginLink)
+              loginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.setItem("isLoggedIn", "false");
+                localStorage.removeItem("currentUser");
+                isLoggedIn = false;
+                location.reload();
+              };
+          } else {
+            if (loginLink) loginLink.classList.remove("hidden");
+            if (signupLink) signupLink.classList.remove("hidden");
+            if (loginLink) loginLink.innerHTML = "Login";
+            if (loginLink) loginLink.href = "login.html";
+            if (loginLink) loginLink.onclick = null;
+          }
+        }
+
+        // Render cart items
+        function renderCart() {
+          const cartItems = document.getElementById("cartItems");
+          const cartTotal = document.getElementById("cartTotal");
+
+          if (cart.length === 0) {
+            cartItems.innerHTML =
+              '<p class="text-champagne/70 text-center py-8">Your cart is empty.</p>';
+            cartTotal.textContent = "€0";
+            return;
+          }
+
+          let total = 0;
+          cartItems.innerHTML = cart
+            .map((item, index) => {
+              total += item.price * item.quantity;
+              return `
+              <div class="border border-gold/20 p-4 rounded-md flex justify-between items-center">
+                <div>
+                  <h4 class="text-lg font-semibold text-gold">${item.name}</h4>
+                  <p class="text-sm text-champagne/70">Type: ${
+                    item.type
+                  } | Qty: ${item.quantity} | Price: €${item.price}</p>
+                  ${
+                    item.date
+                      ? `<p class="text-xs text-champagne/60">Date: ${item.date}</p>`
+                      : ""
+                  }
+                </div>
+                <div class="flex items-center gap-4">
+                  <span class="text-gold font-bold">€${
+                    item.price * item.quantity
+                  }</span>
+                  <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300">Remove</button>
+                </div>
+              </div>
+            `;
+            })
+            .join("");
+          cartTotal.textContent = `€${total}`;
+        }
+
+        // Add to cart
+        async function addToCart(item) {
+          if (!isLoggedIn) {
+            alert("Please login or sign up to add items to cart.");
+            return false;
+          }
+
+          // Data Validation: Prevent empty orders
+          if (
+            !item ||
+            !item.quantity ||
+            item.quantity <= 0 ||
+            isNaN(item.quantity)
+          ) {
+            alert("Please select at least 1 ticket to add to cart.");
+            return false;
+          }
+
+          cart.push(item);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+
+          // NEW: Send to your local MongoDB server
+          const result = await saveToMongoDB(item);
+
+          // Success Feedback: Show thank you message after successful save
+          if (result && result.success) {
+            alert(
+              "Thank you for your purchase! Your booking has been saved to the database.\n\nItem added to cart and saved successfully!"
+            );
+          } else {
+            // Still add to cart even if backend fails, but inform user
+            alert(
+              "Item added to cart! Note: There was an issue saving to the database. Your cart is saved locally."
+            );
+          }
+          return true;
+        }
+
+        // Remove from cart (global function for onclick)
+        window.removeFromCart = function (index) {
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+          renderCart();
+        };
+
+        // Close cart modal (global function)
+        window.closeCartModal = function (event) {
+          if (event && event.target.id !== "cartModal") return;
+          document.getElementById("cartModal").classList.add("hidden");
+          document.getElementById("cartModal").classList.remove("flex");
+        };
+
+        // Clear cart
+        document
+          .getElementById("clearCartBtn")
+          .addEventListener("click", () => {
+            if (confirm("Are you sure you want to clear your cart?")) {
+              cart = [];
+              localStorage.setItem("cart", JSON.stringify(cart));
+              updateCartCount();
+              renderCart();
+            }
+          });
+
+        // Close cart modal
+        document.getElementById("closeCart").addEventListener("click", () => {
+          closeCartModal();
+        });
+
+        // Checkout
+        document.getElementById("checkoutBtn").addEventListener("click", () => {
+          if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+          }
+          alert(
+            "Thank you for your purchase! Your tickets will be sent to your email."
+          );
+          cart = [];
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+          renderCart();
+          document.getElementById("cartModal").classList.add("hidden");
+          document.getElementById("cartModal").classList.remove("flex");
+        });
+
+        // Nutcracker booking
+        const ticketType = document.getElementById("ticketType");
+        const ticketQty = document.getElementById("ticketQty");
+        const totalPrice = document.getElementById("totalPrice");
+        const bookingSummary = document.getElementById("bookingSummary");
+
+        const prices = {
+          Standard: 50,
+          Premium: 90,
+          VIP: 150,
+        };
+
+        function updateBooking() {
+          const type = ticketType.value;
+          let qty = parseInt(ticketQty.value) || 1;
+
+          // Data Validation: Ensure quantity is at least 1
+          if (qty < 1 || isNaN(qty)) {
+            qty = 1;
+            ticketQty.value = 1;
+          }
+
+          const total = prices[type] * qty;
+          totalPrice.innerText = `€${total}`;
+          bookingSummary.innerText = `You have selected ${qty} ${type} ticket(s). Total: €${total}.`;
+        }
+
+        ticketType.addEventListener("change", updateBooking);
+        ticketQty.addEventListener("input", updateBooking);
+
+        document
+          .getElementById("bookTickets")
+          .addEventListener("click", async () => {
+            const type = ticketType.value;
+            const qty = parseInt(ticketQty.value);
+
+            // Data Validation: Check for valid quantity
+            if (!qty || qty <= 0 || isNaN(qty)) {
+              alert("Please select at least 1 ticket to book.");
+              return;
+            }
+
+            const total = prices[type] * qty;
+            const paymentMethod =
+              document.querySelector('input[name="payment"]:checked').id ===
+              "creditCard"
+                ? "Credit Card"
+                : "PayPal";
+
+            const item = {
+              name: "Nutcracker Tickets",
+              type: type,
+              quantity: qty,
+              price: prices[type],
+              paymentMethod: paymentMethod,
+            };
+
+            if (await addToCart(item)) {
+              updateCartCount();
+            }
+          });
+
+        // Gallery booking
+        const galleryPrices = {
+          General: 25,
+          Premium: 45,
+          VIP: 80,
+        };
+
+        const galleryTicketType = document.getElementById("galleryTicketType");
+        const galleryTicketQty = document.getElementById("galleryTicketQty");
+        const galleryDate = document.getElementById("galleryDate");
+        const galleryTotalPrice = document.getElementById("galleryTotalPrice");
+        const galleryBookingSummary = document.getElementById(
+          "galleryBookingSummary"
+        );
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split("T")[0];
+        galleryDate.min = today;
+        galleryDate.value = today;
+
+        function updateGalleryBooking() {
+          const type = galleryTicketType.value;
+          let qty = parseInt(galleryTicketQty.value) || 1;
+
+          // Data Validation: Ensure quantity is at least 1
+          if (qty < 1 || isNaN(qty)) {
+            qty = 1;
+            galleryTicketQty.value = 1;
+          }
+
+          const total = galleryPrices[type] * qty;
+          galleryTotalPrice.innerText = `€${total}`;
+          galleryBookingSummary.innerText = `You have selected ${qty} ${type} pass(es). Total: €${total}.`;
+        }
+
+        galleryTicketType.addEventListener("change", updateGalleryBooking);
+        galleryTicketQty.addEventListener("input", updateGalleryBooking);
+
+        document
+          .getElementById("bookGalleryTickets")
+          .addEventListener("click", async () => {
+            const type = galleryTicketType.value;
+            const qty = parseInt(galleryTicketQty.value);
+
+            // Data Validation: Check for valid quantity
+            if (!qty || qty <= 0 || isNaN(qty)) {
+              alert("Please select at least 1 pass to book.");
+              return;
+            }
+
+            const selectedDate = galleryDate.value;
+            const total = galleryPrices[type] * qty;
+            const paymentMethod =
+              document.querySelector('input[name="galleryPayment"]:checked')
+                .id === "galleryCreditCard"
+                ? "Credit Card"
+                : "PayPal";
+
+            const item = {
+              name: "Gallery Entry Pass",
+              type: type,
+              quantity: qty,
+              price: galleryPrices[type],
+              date: selectedDate,
+              paymentMethod: paymentMethod,
+            };
+
+            if (await addToCart(item)) {
+              updateCartCount();
+            }
+          });
+
+        // Check login status
+        if (!isLoggedIn) {
+          document
+            .getElementById("loginPromptNutcracker")
+            .classList.remove("hidden");
+          document
+            .getElementById("loginPromptGallery")
+            .classList.remove("hidden");
+        }
+
+        // Check login status on page load
+        function checkLoginStatus() {
+          isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+          if (!isLoggedIn) {
+            document
+              .getElementById("loginPromptNutcracker")
+              .classList.remove("hidden");
+            document
+              .getElementById("loginPromptGallery")
+              .classList.remove("hidden");
+          } else {
+            document
+              .getElementById("loginPromptNutcracker")
+              .classList.add("hidden");
+            document
+              .getElementById("loginPromptGallery")
+              .classList.add("hidden");
+          }
+          updateCartCount();
+        }
+
+        // Initialize on page load
+        checkLoginStatus();
+      </script>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      id="footer"
+      class="py-24 border-t border-white/5 text-center bg-[#4D0505]"
+    >
+      <h2 class="text-4xl md:text-5xl stylized-brand italic mb-8">
+        Mon Amour Grand
+      </h2>
+
+      <!-- Navigation Links -->
+      <div
+        class="flex flex-wrap justify-center gap-6 md:gap-8 text-[12px] md:text-[14px] tracking-[0.35em] uppercase text-champagne/60 font-black mb-6"
+      >
+        <a href="#hero" class="hover:text-gold transition-colors">Home</a>
+        <a href="#nutcracker-section" class="hover:text-gold transition-colors"
+          >The Nutcracker</a
+        >
+        <a href="#gallery-section" class="hover:text-gold transition-colors"
+          >Gallery</a
+        >
+      </div>
+
+      <!-- Social Links with Icons -->
+      <div
+        class="flex justify-center gap-6 md:gap-8 text-gold text-[14px] md:text-[16px] mb-10"
+      >
+        <a
+          href="#"
+          class="hover:text-white transition-colors flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 md:w-6 md:h-6 fill-current"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.056 1.97.246 2.428.414a4.92 4.92 0 011.75 1.043 4.923 4.923 0 011.043 1.75c.168.458.358 1.258.414 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.246 1.97-.414 2.428a4.92 4.92 0 01-1.043 1.75 4.923 4.923 0 01-1.75 1.043c-.458.168-1.258.358-2.428.414-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.246-2.428-.414a4.92 4.92 0 01-1.75-1.043 4.923 4.923 0 01-1.043-1.75c-.168-.458-.358-1.258-.414-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.056-1.17.246-1.97.414-2.428a4.92 4.92 0 011.043-1.75 4.923 4.923 0 011.75-1.043c.458-.168 1.258-.358 2.428-.414 1.266-.058 1.646-.07 4.85-.07M12 0C8.736 0 8.332.014 7.052.072 5.77.129 4.68.308 3.785.637c-.897.331-1.66.77-2.417 1.528C.61 3.427.171 4.19-.16 5.086c-.33.895-.508 1.986-.565 3.268C-.014 8.668 0 9.072 0 12s.014 3.332.072 4.612c.057 1.282.236 2.373.565 3.268.331.896.77 1.659 1.528 2.417.757.757 1.521 1.197 2.417 1.528.895.33 1.986.508 3.268.565C8.668 23.986 9.072 24 12 24s3.332-.014 4.612-.072c1.282-.057 2.373-.236 3.268-.565.896-.331 1.659-.77 2.417-1.528.757-.757 1.197-1.521 1.528-2.417.33-.895.508-1.986.565-3.268C23.986 15.332 24 14.928 24 12s-.014-3.332-.072-4.612c-.057-1.282-.236-2.373-.565-3.268-.331-.896-.77-1.659-1.528-2.417-.757-.757-1.521-1.197-2.417-1.528C19.373.308 18.282.129 17 .072 15.72.014 15.316 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"
+            />
+          </svg>
+          Instagram
+        </a>
+        <a
+          href="#"
+          class="hover:text-white transition-colors flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 md:w-6 md:h-6 fill-current"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M22.675 0h-21.35C.594 0 0 .593 0 1.326v21.348C0 23.406.594 24 1.325 24h11.495v-9.294H9.692V11.29h3.128V8.414c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.098 2.794.142v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.31h3.587l-.467 3.416h-3.12V24h6.116c.73 0 1.324-.594 1.324-1.326V1.326C24 .593 23.406 0 22.675 0z"
+            />
+          </svg>
+          Facebook
+        </a>
+        <a
+          href="#"
+          class="hover:text-white transition-colors flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 md:w-6 md:h-6 fill-current"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.758-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.127.347 2.32.535 3.554.535 6.624 0 12-5.373 12-12S18.627 0 12 0z"
+            />
+          </svg>
+          Pinterest
+        </a>
+      </div>
+
+      <p
+        class="text-[10px] md:text-[12px] tracking-[0.8em] uppercase text-white/10"
+      >
+        Avenue Montaigne, Paris — 2026
+      </p>
+    </footer>
+  </body>
+</html>
